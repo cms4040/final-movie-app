@@ -69,7 +69,8 @@ def predict_target(df, target_column, user_input):
         pred_row[col] = le_dict[col].transform(pred_row[col].astype(str))
         
     res = model.predict(pred_row)
-    return max(0, int(res))
+    # TypeError 방지: 배열 데이터에서 첫 번째 요소([0])를 명확히 지정하여 숫자로 변환합니다.
+    return max(0, int(res[0]))
 
 # 유저 입력값 패킹
 current_movie_profile = {
